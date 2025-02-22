@@ -1,8 +1,7 @@
-// screens/HomeScreen.js
+// HomeScreen.js
 import React from 'react';
 import { ScrollView, Text, StyleSheet } from 'react-native';
 import TypeBook from '../components/TypeBook';
-import Book from '../components/Book';
 
 const HomeScreen = ({ navigation }) => {
   return (
