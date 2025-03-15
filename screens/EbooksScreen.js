@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Book from '../components/Book';
 
 const EbooksScreen = ({ navigation }) => {
@@ -103,22 +103,31 @@ Friends, enemies, lovers. Everyone at Basgiath War College has an agenda—becau
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {ebooks.map((book, index) => (
-        <Book
-          key={index}
-          imageUrl={book.imageUrl}
-          title={book.title}
-          author={book.author}
-          price={book.price}
-          onPress={() => navigation.navigate('Details', { 
-            imageUrl: book.imageUrl,
-            title: book.title,
-            author: book.author,
-            price: book.price,
-            description: book.description,
-            publicationDate: book.publicationDate,
-            pages: book.pages
-          })}
-        />
+        <View key={index} style={styles.bookContainer}>
+          <Book
+            imageUrl={book.imageUrl}
+            title={book.title}
+            author={book.author}
+            price={book.price}
+            onPress={() => navigation.navigate('Amount', { book })}
+          />
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('Details', {
+                imageUrl: book.imageUrl,
+                title: book.title,
+                author: book.author,
+                price: book.price,
+                description: book.description,
+                publicationDate: book.publicationDate,
+                pages: book.pages
+              })}
+            >
+              <Text style={styles.buttonText}>Bekijk Details</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       ))}
     </ScrollView>
   );
@@ -128,6 +137,25 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     backgroundColor: '#A3B18A',
+  },
+  bookContainer: {
+    marginBottom: 20,
+  },
+  buttonContainer: {
+    marginTop: 0,
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#6D4C41',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#F5E6CA',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

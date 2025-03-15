@@ -9,13 +9,13 @@ import BooksScreen from './screens/BooksScreen';
 import AudiobooksScreen from './screens/AudiobooksScreen';
 import EbooksScreen from './screens/EbooksScreen';
 import BookDetails from './components/BookDetails';
+import AmountScreen from './screens/AmountScreen';
 import { Ionicons } from '@expo/vector-icons';
-
-
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+// HomeStack for 'Home' screens
 const HomeStack = () => (
   <Stack.Navigator
     screenOptions={{
@@ -29,10 +29,11 @@ const HomeStack = () => (
     <Stack.Screen name="Audiobooks" component={AudiobooksScreen} />
     <Stack.Screen name="eBooks" component={EbooksScreen} />
     <Stack.Screen name="Details" component={BookDetails} />
+    <Stack.Screen name="Amount" component={AmountScreen} />
   </Stack.Navigator>
 );
 
-
+// BlogStack for Blog screen
 const BlogStack = () => (
   <Stack.Navigator
     screenOptions={{
@@ -51,7 +52,7 @@ const App = () => {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
-            let iconName = route.name === 'Home' ? 'home' : 'book';
+            let iconName = route.name === 'HomeTab' ? 'home' : 'book';
             return <Ionicons name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: '#6D4C41',
@@ -59,8 +60,16 @@ const App = () => {
           tabBarStyle: { backgroundColor: '#F5E6CA' },
         })}
       >
-        <Tab.Screen name="Home" component={HomeStack} options={{ headerShown: false }} />
-        <Tab.Screen name="Blog" component={BlogStack} options={{ headerShown: false }} />
+        <Tab.Screen 
+          name="HomeTab"
+          component={HomeStack} 
+          options={{ headerShown: false }} 
+        />
+        <Tab.Screen 
+          name="Blog" 
+          component={BlogStack} 
+          options={{ headerShown: false }} 
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

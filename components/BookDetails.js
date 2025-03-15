@@ -11,7 +11,7 @@ const BookDetails = ({ route }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.detailsContainer}>
-        <Image source={{ uri: book.imageUrl }} style={styles.image} />
+      <Image source={{ uri: book.imageUrl }} style={styles.image} />
         <Text style={styles.title}>{book.title}</Text>
         <Text style={styles.author}>By {book.author}</Text>
         <Text style={styles.price}>{book.price}</Text>
