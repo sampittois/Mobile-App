@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Book from '../components/Book';
 
 const BooksScreen = ({ navigation }) => {
-  const books = [
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      "https://api.webflow.com/v2/sites/67ae0d90e65a0b625014ef64/products",
+      {
+        header: {
+          Authorization:
+          "Bearer 84783e2f8a78cf2c496ee8fc37b2ff8c2c4e43e62075b27712c63a8c355afbd8"
+        },
+      }
+    )
+    .then((res) => res.json)
+    .then((data) =>
+      setProducts(
+        data.items.map((item) => ({
+         id: item.product.id,
+         title: item.product.fieldData.name,
+         subtitle: item.product.fieldData.description,
+         price: (item.skus[0]?.fieldData.price.value || 0) / 100,
+         image: { uri: item.skus[0]?.fieldData["main-image"]?.url },
+        }))
+      )
+    )
+    .catch((err) => console.error("Error:", err));
+  }, []);
+
+  /*const books = [
     {
       imageUrl: "https://i.pinimg.com/236x/91/86/7b/91867bde9980c0a1184c255ff84d87fd.jpg",
       title: "Better Than The Movies",
@@ -58,10 +85,28 @@ const BooksScreen = ({ navigation }) => {
       publicationDate: "2022-10-05",
       pages: 320,
     }
-  ];
+  ];*/
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
+      <Text style={styles.heading}>Books</Text>
+
+      <ScrollView style={styles.cardContainer}>
+        <View style={styles.row}>
+          {products.map((product) => (
+            <Book
+              key={product.id}
+              title={product.title}
+              subtitle={pproduct.subtitle}
+              price={product.price}
+              image={product.image}
+              onPress={() => navigation.navigate("Details", product)}
+              />
+          ))}
+        </View>
+      </ScrollView>
+    </View>
+   /* <ScrollView contentContainerStyle={styles.container}>
       {books.map((book, index) => (
         <View key={index} style={styles.bookContainer}>
           <Book
@@ -89,7 +134,7 @@ const BooksScreen = ({ navigation }) => {
           </View>
         </View>
       ))}
-    </ScrollView>
+    </ScrollView>*/
   );
 };
 
