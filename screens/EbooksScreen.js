@@ -13,7 +13,7 @@ const EbooksScreen = ({ navigation }) => {
 A mesmerizing romance.
 An unbreakable bond
 between two sisters.
-
+15.00
 Scarlett Dragna has never left the tiny island where she and her sister, Tella, live with their powerful, and cruel, father. Now Scarlett’s father has arranged a marriage for her, and Scarlett thinks her dreams of seeing Caraval—the faraway, once-a-year performance where the audience participates in the show—are over.
 
 But this year, Scarlett’s long-dreamt-of invitation finally arrives. With the help of a mysterious sailor, Tella whisks Scarlett away to the show. Only, as soon as they arrive, Tella is kidnapped by Caraval’s mastermind organizer, Legend. It turns out that this season’s Caraval revolves around Tella, and whoever finds her first is the winner.
